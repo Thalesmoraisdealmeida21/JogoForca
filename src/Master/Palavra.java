@@ -2,6 +2,7 @@
 package Master;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -11,7 +12,7 @@ public class Palavra
 {
     
      private String nome;
-     private int acertos;
+     private int acertos =0;
      private String dificulty; 
 
     public String getDificulty() {
@@ -42,20 +43,35 @@ public class Palavra
         return nome.length();
     }
     
-    public int chutar(Character c){
-        int i = acertos + 1;
-        while(i < nome.length()){
+    public ArrayList<Integer> ContemCharacter(Character c, ArrayList<Character> jaChutadas){
+        ArrayList<Integer> retorno = new ArrayList<>();
+        int i;
+        for(i=0; i < nome.length(); i++){  
             if(nome.charAt(i) == c){
-                acertos = i;
-                return i;
+                if(!jaChutadas.contains(c)){
+                    retorno.add(i);
+                }  
             }
-            i++;
         }
-        return -1;
+        return retorno;
     }
-       
-   
-     }
+    
+     /* public boolean ContemCharacter(Character c){
+        return nome.contains(c.toString());
+    }*/
+      
+    public ArrayList<Integer> ContemCharacter(Character c){
+        ArrayList<Integer> retorno = new ArrayList<>();
+        int i;
+        for(i=0; i < nome.length(); i++){  
+            if(nome.charAt(i) == c){
+                    retorno.add(i);
+                  
+            }
+        }
+        return retorno;
+    }
+}
     
  
     

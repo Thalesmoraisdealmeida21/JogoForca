@@ -5,12 +5,87 @@
  */
 package Master;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author thales
  */
 public abstract class Jogo {
-    Jogador j;
-    Categoria c;
+    private Jogador j;
+    private Categoria c;
+    protected Integer tentativas = 0;
+    protected Integer pontosJogo;
+    protected ArrayList<Integer> chutes;
+
+    public void setChutes(ArrayList<Integer> chutes) {
+        this.chutes = chutes;
+    }
+
+    public ArrayList<Integer> getChutes() {
+        return chutes;
+    }
+
+    public Integer getTentativas() {
+        return tentativas;
+    }
+
+    public void setTentativas(Integer tentativas) {
+        this.tentativas = tentativas;
+    }
+
+    public Jogo(Jogador j, Categoria c) {
+        this.j = j;
+        this.c = c;
+    }
+
+    public Jogador getJ() {
+        return j;
+    }
+    
+    public void setJ(Jogador j) {
+        this.j = j;
+    }
+    
+    public void finalizaJogo(){
+        j.setPontos(pontosJogo);
+    }
+    
+    /**
+     
+     * retorna uma string apenas mostrando as letras ja chutadas
+     */
+    public String printaChute(String palavra)
+    {
+        int i, i2=0;
+        String retorno =  "";
+        Character aux;
+        for(i=0;i<palavra.length();i++)
+        {
+            if(chutes.contains(i))
+            {
+                 aux = palavra.charAt(i);
+                 retorno = retorno + " " + aux.toString();
+            }
+            else
+            {
+                retorno = retorno + " _";
+            }
+        }
+        return retorno;
+    } 
+    
+    
+    //public abstract boolean testaFimJogo();
+    public abstract void chutar(Character chute);
+    
+    
+
+
+   
+    
+    
+    
+    
     
 }

@@ -57,6 +57,7 @@ public class Categoria {
      public void removePalavra(Palavra p){
         palavras.remove(p);
     }
+     
   
     
 }
