@@ -24,11 +24,9 @@ public class JogoHard extends Jogo {
 
     public JogoHard(Jogador j, Categoria c) {
         super(j, c);
-        p = c.SorteiaPalavra();
+        p = c.SorteiaPalavra(3);
         jaChutadas = new ArrayList<>();
-        while(!p.getDificulty().equals("hard")){
-             p = c.SorteiaPalavra();
-        }
+  
      
     }
 
@@ -40,18 +38,7 @@ public class JogoHard extends Jogo {
         this.p = p;
     }
     
-    /*public boolean testaFimJogo(){
-      if(this.tentativas >= numMaxErrors ){
-          finalizaJogo();
-          return true;
-      }
-      if(p.getAcertos() == p.getTamanho()){
-          finalizaJogo();
-          return true;
-      }else{
-          return false;
-      }
-    }*/
+   
     
     /** 
         Adiciona chute as letras ja chutadas 
@@ -106,6 +93,16 @@ public class JogoHard extends Jogo {
         }
         return retorno;
     } 
+
+    @Override
+    public boolean testaFimJogo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean verificaVitoria() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
  }
     

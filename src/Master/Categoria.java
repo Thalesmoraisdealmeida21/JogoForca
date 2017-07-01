@@ -8,6 +8,12 @@ package Master;
 import java.util.ArrayList;
 import java.util.Random;
 
+/*CadastrarCategoria()
+    
+/*CadastrarJogador()*/
+/*CadastrarPalavra()*/
+
+
 /**
  *
  * @author thales
@@ -49,6 +55,29 @@ public class Categoria {
         int sort = r.nextInt(palavras.size());
         return (palavras.get(sort)); 
     }
+    
+    public Palavra SorteiaPalavra(Integer dificulCodigo){
+        Random r = new Random();
+        Palavra p;
+        int sort, i;
+        sort = r.nextInt(palavras.size());
+        p = palavras.get(sort);
+        return p;
+    }
+    
+     public Palavra SorteiaPalavra(String legenda){
+        Random r = new Random();
+        Palavra p;
+        int sort, i;
+        sort = r.nextInt(palavras.size());
+        p = palavras.get(sort);
+        
+   
+               return p;
+    }
+    
+    
+    
     
     public void addPalavra(Palavra p){
         palavras.add(p);

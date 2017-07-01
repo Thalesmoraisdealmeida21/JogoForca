@@ -5,6 +5,12 @@
  */
 package Master;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 /**
  *
  * @author thales
@@ -13,7 +19,7 @@ public class Jogador {
     private String nome;
     private int pontos;
     
-      public Jogador(String nome) {
+    public Jogador(String nome) {
         this.nome = nome;
         pontos = 0;
     }
@@ -33,6 +39,23 @@ public class Jogador {
     
     public String getNome() {
         return nome;
+    }
+    
+    public static boolean CadastraJogador(Jogador j) throws IOException{
+        
+        FileReader arq2 = new FileReader("/home/thales/jogador.txt");
+        BufferedReader lerArq = new BufferedReader(arq2);
+        
+        FileWriter arq = new FileWriter("/home/thales/jogador.txt");
+        PrintWriter gravarArq = new PrintWriter(arq);
+         gravarArq.println(j.getNome());
+    
+         
+         arq.close();
+          
+        
+        
+        return true;
     }
 
     

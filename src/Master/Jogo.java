@@ -17,6 +17,35 @@ public abstract class Jogo {
     protected Integer tentativas = 0;
     protected Integer pontosJogo;
     protected ArrayList<Integer> chutes;
+    protected Integer acertos;
+
+    public void setC(Categoria c) {
+        this.c = c;
+    }
+
+    public void setPontosJogo(Integer pontosJogo) {
+        this.pontosJogo = pontosJogo;
+    }
+
+    public void setAcertos(Integer acertos) {
+        this.acertos = acertos;
+    }
+    
+    
+
+    public Categoria getC() {
+        return c;
+    }
+
+    public Integer getPontosJogo() {
+        return pontosJogo;
+    }
+
+    public Integer getAcertos() {
+        return acertos;
+    }
+    
+    
 
     public void setChutes(ArrayList<Integer> chutes) {
         this.chutes = chutes;
@@ -37,6 +66,7 @@ public abstract class Jogo {
     public Jogo(Jogador j, Categoria c) {
         this.j = j;
         this.c = c;
+        chutes = new ArrayList<>();
     }
 
     public Jogador getJ() {
@@ -76,8 +106,9 @@ public abstract class Jogo {
     } 
     
     
-    //public abstract boolean testaFimJogo();
+    public abstract boolean testaFimJogo();
     public abstract void chutar(Character chute);
+    public abstract boolean verificaVitoria();
     
     
 

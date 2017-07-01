@@ -6,6 +6,11 @@
 package Master;
 
 import Master.InterfaceGrafica.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,12 +19,38 @@ import java.util.Scanner;
  * @author thales
  */
 public class main {
-    public static void main(String args[]){
+    public static void main(String args[]) throws IOException{
         
-        /*JogoRunning frame = new JogoRunning();
-        frame.setVisible(true);*/
+        Configurações frame = new Configurações();
+        frame.setVisible(true);
         
-       Categoria c = new Categoria("Informatica");
+        
+        /* FileWriter arq = new FileWriter("/home/thales/thalex.txt");
+         PrintWriter gravarArq = new PrintWriter(arq);
+         
+         for(int i=0; i<10; i++){
+         gravarArq.println("Thales|20");
+         gravarArq.println("Thiago|30");
+         }
+         
+         arq.close();
+         
+          FileReader arq2 = new FileReader("/home/thales/thalex.txt");
+          BufferedReader lerArq = new BufferedReader(arq2);
+      ArrayList<String> linhas = new ArrayList<>();
+      String linha = lerArq.readLine(); 
+      while (linha != null) {
+        System.out.printf("%s\n", linha);
+ 
+        linha = lerArq.readLine();
+        linhas.add(linha);// lê da segunda até a última linha
+      }
+     
+      if(linhas.get(0).equals(_))
+      System.out.print("");*/
+       
+        
+      /*Categoria c = new Categoria("Informatica");
         Palavra p = new Palavra("Computador");
         //Palavra p2 = new Palavra("Mouseo"); 
        // Palavra p3 = new Palavra("vvo");
@@ -46,17 +77,18 @@ public class main {
         teste.add(2);*/
         
 
-        ArrayList<Integer> teste1 = new ArrayList<>();
+       /* ArrayList<Integer> teste1 = new ArrayList<>();
         ArrayList<Integer> teste2 = new ArrayList<>();
         ArrayList<Integer> teste3 = new ArrayList<>();
         
         teste1.add(1);
         teste1.add(2);
-        teste1.add(3);
+     
         
         teste2.add(4);
         teste2.add(5);
         teste2.add(6);
+        
         
         teste1.addAll(teste2);
         System.out.println(teste1);
@@ -68,27 +100,25 @@ public class main {
         
      Scanner ler;
     ler = new Scanner(System.in);
-   
+       System.out.println(jogo.getP().getNome());
+        int i = 0;
+        while(i < 30){
+            System.out.println("Informe seu chute");
+            String x = ler.next();
+            jogo.chutar(x.charAt(0));
+            System.out.println(jogo.printaChute());
+            i++;
+        }*/
+    
         
-        System.out.println(jogo.getP().getNome());
-        System.out.println("Informe seu chute");
-        String x = ler.next();
-        jogo.chutar(x.charAt(0));
+        
+      
         
        
         
-        /*jogo.chutar(x.charAt(0));
-        System.out.println(jogo.printaChute(teste));
-        System.out.println(jogo.getChutes());*/
-                
-   /* int retorno = jogo.getP().chutar(chute);
-    if(retorno == -1){
-        System.out.println("Você errou tente novamente");
-    }else{
-        System.out.print("Voce acertou  " + jogo.getP().getNome().charAt(retorno) + "   " + retorno);
-    }
-    
-    System.out.println(retorno);*/
+        
+
+
 
 
       

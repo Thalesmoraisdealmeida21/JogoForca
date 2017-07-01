@@ -26,9 +26,6 @@ public class JogoMedium extends Jogo {
         super(j, c);
         p = c.SorteiaPalavra();
         jaChutadas = new ArrayList<>();
-        while(!p.getDificulty().equals("medium")){
-             p = c.SorteiaPalavra();
-        }
      
     }
 
@@ -106,6 +103,16 @@ public class JogoMedium extends Jogo {
         }
         return retorno;
     } 
+
+    @Override
+    public boolean testaFimJogo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean verificaVitoria() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
  }
     

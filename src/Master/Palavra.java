@@ -11,27 +11,15 @@ import java.util.Iterator;
 public class Palavra 
 {
     
-     private String nome;
-     private int acertos =0;
-     private String dificulty; 
-
-    public String getDificulty() {
-        return dificulty;
-    }
-
-    public void setDificulty(String dificulty) {
-        this.dificulty = dificulty;
-    }
-     
-     
+    private String nome;
+    private int acertos = 0;
 
     public Palavra(String nome) {
     
         this.nome = nome;
   
     }
-
-    public void setNome(String nome) {
+  public void setNome(String nome) {
         this.nome = nome;
     }
 
@@ -70,6 +58,10 @@ public class Palavra
             }
         }
         return retorno;
+    }
+
+    int getAcertos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
     

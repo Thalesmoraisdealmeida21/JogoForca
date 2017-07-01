@@ -31,6 +31,20 @@ public class Rank {
         return jogadores;
     }
     
+    public Integer getPosicao(Jogador j)
+    {
+        int i, aux;
+       return 1;
+     
+    }
+    
+    /* Metodos a construir*/
+    //public ArrayList<Jogador> getRank();
+    public Integer getPontuacao(Integer posicao){return 0;}
+    public Integer getJogador(Integer posicao){return 0;}
+    
+    
+      
     
     
     

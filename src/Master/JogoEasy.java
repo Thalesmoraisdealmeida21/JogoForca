@@ -21,16 +21,22 @@ public class JogoEasy extends Jogo {
     private ArrayList<Character> jaChutadas;
    
     
-
+    /**
+     * Dificuldade Niveis
+     * ---Legenda----
+     * 1 - Easy
+     * 2 - Medium
+     * 3 - Hard
+     * @param j
+     * @param c 
+     */
     public JogoEasy(Jogador j, Categoria c) {
         super(j, c);
-        p = c.SorteiaPalavra();
+        p = c.SorteiaPalavra(1); //sorteia palavra easy
         jaChutadas = new ArrayList<>();
-        while(!p.getDificulty().equals("easy")){
-             p = c.SorteiaPalavra();
-        }
-     
+              
     }
+
 
     public Palavra getP() {
         return p;
@@ -39,19 +45,26 @@ public class JogoEasy extends Jogo {
     public void setP(Palavra p) {
         this.p = p;
     }
-    
-    /*public boolean testaFimJogo(){
-      if(this.tentativas >= numMaxErrors ){
-          finalizaJogo();
-          return true;
-      }
-      if(p.getAcertos() == p.getTamanho()){
+
+   public boolean testaFimJogo(){
+      if(tentativas == numMaxErrors ){
           finalizaJogo();
           return true;
       }else{
-          return false;
+          if(verificaVitoria()){
+              return true;
+          }
       }
-    }*/
+      return false;
+    }
+    
+   public boolean verificaVitoria(){
+       if(printaChute().contains("_")){
+            return false;
+       }else{
+           return true;
+       }
+   }
     
     /** 
         Adiciona chute as letras ja chutadas 
@@ -60,10 +73,9 @@ public class JogoEasy extends Jogo {
      * 
      */
     public void chutar(Character chute){
-    
        jaChutadas.add(chute);
        tentativas++;
-       //chutes.sort(p.ContemCharacter(chute));
+       chutes.addAll(p.ContemCharacter(chute));
     }
     
     public String printaChute()
