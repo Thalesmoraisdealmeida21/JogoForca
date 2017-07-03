@@ -5,6 +5,9 @@
  */
 package Master;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -86,6 +89,15 @@ public class Categoria {
      public void removePalavra(Palavra p){
         palavras.remove(p);
     }
+     
+     public static boolean CadastrarCategoria(Categoria categ) throws IOException{
+         FileWriter arq = new FileWriter("/home/thales/BancoForca/categoria.txt", true);
+         PrintWriter gravarArq = new PrintWriter(arq);
+         gravarArq.println(categ.getNome());
+         arq.close();
+        return true;
+     }
+         
      
   
     

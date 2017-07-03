@@ -1,7 +1,10 @@
 package Master;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 
@@ -37,18 +40,6 @@ public class JogoMedium extends Jogo {
         this.p = p;
     }
     
-    /*public boolean testaFimJogo(){
-      if(this.tentativas >= numMaxErrors ){
-          finalizaJogo();
-          return true;
-      }
-      if(p.getAcertos() == p.getTamanho()){
-          finalizaJogo();
-          return true;
-      }else{
-          return false;
-      }
-    }*/
     
     /** 
         Adiciona chute as letras ja chutadas 
@@ -56,11 +47,14 @@ public class JogoMedium extends Jogo {
      * soma o numero de tentatias
      * 
      */
-    public void chutar(Character chute){
-    
+      public void chutar(Character chute){
        jaChutadas.add(chute);
        tentativas++;
-       //chutes.sort(p.ContemCharacter(chute));
+       chutes.addAll(p.ContemCharacter(chute));
+       if(!p.ContemCharacter(chute).isEmpty()){
+           setAcertos(getAcertos() + 1);
+           setPontosJogo(getAcertos() * 3);
+       }
     }
     
     public String printaChute()
@@ -104,15 +98,34 @@ public class JogoMedium extends Jogo {
         return retorno;
     } 
 
-    @Override
-    public boolean testaFimJogo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Integer retornaErrosRestantes(){
+        return numMaxErrors - tentativas;
+    }
+       
+   public boolean testaFimJogo(){
+      if(tentativas == numMaxErrors ){
+          try {
+              finalizaJogo();
+          } catch (IOException ex) {
+              Logger.getLogger(JogoMedium.class.getName()).log(Level.SEVERE, null, ex);
+          }
+          return true;
+      }else{
+          if(verificaVitoria()){
+              return true;
+          }
+      }
+      return false;
     }
 
-    @Override
-    public boolean verificaVitoria() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   public boolean verificaVitoria(){
+       if(p.getTamanho() == getAcertos()){
+           setPontosJogo(getPontosJogo() + 20);
+       return true;
+       }else{
+           return false;
+       }
+   }
 
  }
     

@@ -5,6 +5,7 @@
  */
 package Master;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -17,7 +18,8 @@ public abstract class Jogo {
     protected Integer tentativas = 0;
     protected Integer pontosJogo;
     protected ArrayList<Integer> chutes;
-    protected Integer acertos;
+    public Integer acertos = 0;
+   
 
     public void setC(Categoria c) {
         this.c = c;
@@ -77,8 +79,9 @@ public abstract class Jogo {
         this.j = j;
     }
     
-    public void finalizaJogo(){
-        j.setPontos(pontosJogo);
+    public void finalizaJogo() throws IOException{
+        j.setPontos(getPontosJogo());
+        j.gravaPontosBD(j);
     }
     
     /**

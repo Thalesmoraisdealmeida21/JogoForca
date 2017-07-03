@@ -1,7 +1,10 @@
 package Master;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 
@@ -46,11 +49,14 @@ public class JogoHard extends Jogo {
      * soma o numero de tentatias
      * 
      */
-    public void chutar(Character chute){
-    
+     public void chutar(Character chute){
        jaChutadas.add(chute);
        tentativas++;
-       //chutes.sort(p.ContemCharacter(chute));
+       chutes.addAll(p.ContemCharacter(chute));
+       if(!p.ContemCharacter(chute).isEmpty()){
+           setAcertos(getAcertos() + 1);
+           setPontosJogo(getAcertos() * 4);
+       }
     }
     
     public String printaChute()
@@ -94,14 +100,33 @@ public class JogoHard extends Jogo {
         return retorno;
     } 
 
-    @Override
-    public boolean testaFimJogo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     public boolean testaFimJogo(){
+      if(tentativas == numMaxErrors ){
+          try {
+              finalizaJogo();
+          } catch (IOException ex) {
+              Logger.getLogger(JogoHard.class.getName()).log(Level.SEVERE, null, ex);
+          }
+          return true;
+      }else{
+          if(verificaVitoria()){
+              return true;
+          }
+      }
+      return false;
     }
 
-    @Override
-    public boolean verificaVitoria() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     public boolean verificaVitoria(){
+       if(p.getTamanho() == getAcertos()){
+           setPontosJogo(getPontosJogo() + 30);
+       return true;
+       }else{
+           return false;
+       }
+   }
+    
+      public Integer retornaErrosRestantes(){
+        return numMaxErrors - tentativas;
     }
 
  }

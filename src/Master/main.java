@@ -24,6 +24,54 @@ public class main {
         Configurações frame = new Configurações();
         frame.setVisible(true);
         
+        //Jogador j = new Jogador("Miriam");
+       // j.setPontos(Jogador.retornaPontosBD(j));
+        
+           // System.out.println(Jogador.retornaPontosBD(j));
+            
+           // int teste = Integer.parseInt(Jogador.retornaPontosBD(j));
+            
+           // System.out.println(teste);
+        
+        /*FileReader arq2 = new FileReader("/home/thales/BancoForca/jogador.txt");
+        BufferedReader lerArq = new BufferedReader(arq2);
+
+        
+        ArrayList<String> leitura = new ArrayList<>();
+        
+        String linha = lerArq.readLine();
+        
+          while(linha != null){
+             leitura.add(linha);
+             System.out.println(linha);
+             linha = lerArq.readLine();
+          }
+          arq2.close();
+          
+           FileWriter arq = new FileWriter("/home/thales/BancoForca/jogador.txt");
+           PrintWriter gravarArq = new PrintWriter(arq);
+
+         int i=0;
+         while(i < leitura.size()){
+             System.out.println(leitura.get(i).substring(0, leitura.get(i).indexOf(",")));
+             if((leitura.get(i).substring(0, leitura.get(i).indexOf(","))).equals("Thales")){
+               gravarArq.write(leitura.get(i).substring(0, leitura.get(i).indexOf(",") +1) + "40\n");
+               System.out.println("entrou if");
+             }else{
+            gravarArq.write(leitura.get(i)+"\n");
+             }
+            i++;
+        }
+       arq.close();*/
+            
+
+       
+
+        
+        
+            
+       
+        
         
         /* FileWriter arq = new FileWriter("/home/thales/thalex.txt");
          PrintWriter gravarArq = new PrintWriter(arq);

@@ -1,7 +1,10 @@
 package Master;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 
@@ -38,6 +41,8 @@ public class JogoEasy extends Jogo {
     }
 
 
+
+
     public Palavra getP() {
         return p;
     }
@@ -48,7 +53,11 @@ public class JogoEasy extends Jogo {
 
    public boolean testaFimJogo(){
       if(tentativas == numMaxErrors ){
-          finalizaJogo();
+          try {
+              finalizaJogo();
+          } catch (IOException ex) {
+              Logger.getLogger(JogoEasy.class.getName()).log(Level.SEVERE, null, ex);
+          }
           return true;
       }else{
           if(verificaVitoria()){
@@ -59,10 +68,11 @@ public class JogoEasy extends Jogo {
     }
     
    public boolean verificaVitoria(){
-       if(printaChute().contains("_")){
-            return false;
+       if(p.getTamanho() == getAcertos()){
+           setPontosJogo(getPontosJogo() + 10);
+       return true;
        }else{
-           return true;
+           return false;
        }
    }
     
@@ -76,6 +86,10 @@ public class JogoEasy extends Jogo {
        jaChutadas.add(chute);
        tentativas++;
        chutes.addAll(p.ContemCharacter(chute));
+       if(!p.ContemCharacter(chute).isEmpty()){
+           setAcertos(getAcertos() + 1);
+           setPontosJogo(getAcertos() * 2);
+       }
     }
     
     public String printaChute()
@@ -99,7 +113,7 @@ public class JogoEasy extends Jogo {
     } 
     
     
-       public String printaChute(ArrayList<Integer> chutes)
+    public String printaChute(ArrayList<Integer> chutes)
     {
         int i, i2=0;
         String retorno =  "";
@@ -117,7 +131,11 @@ public class JogoEasy extends Jogo {
             }
         }
         return retorno;
-    } 
+    }
+       
+    public Integer retornaErrosRestantes(){
+        return numMaxErrors - tentativas;
+    }
 
  }
     

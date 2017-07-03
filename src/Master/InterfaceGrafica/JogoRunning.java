@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  */
 public class JogoRunning extends javax.swing.JFrame {
 
-    JogoEasy j;
+    Jogo j;
     
     /**
      * Creates new form JogoRunning
@@ -21,6 +21,19 @@ public class JogoRunning extends javax.swing.JFrame {
         initComponents();
         this.j = j;
         NomeJogdor.setText(j.getJ().getNome());
+    }
+
+    JogoRunning(JogoMedium j) {
+       initComponents();
+       this.j = j;
+       NomeJogdor.setText(j.getJ().getNome());
+       
+    }
+
+    JogoRunning(JogoHard j) {
+       initComponents();
+       this.j = j;
+       NomeJogdor.setText(j.getJ().getNome());
     }
 
     /**
@@ -41,8 +54,8 @@ public class JogoRunning extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         TENT = new javax.swing.JLabel();
         acert = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        errorRest = new javax.swing.JLabel();
+        pontos = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         NomeJogdor = new javax.swing.JLabel();
@@ -77,9 +90,9 @@ public class JogoRunning extends javax.swing.JFrame {
 
         acert.setText("0");
 
-        jLabel7.setText("0");
+        errorRest.setText("0");
 
-        jLabel8.setText("0");
+        pontos.setText("0");
 
         jLabel9.setFont(new java.awt.Font("Impact", 2, 14)); // NOI18N
         jLabel9.setText("Jogo da Forca");
@@ -117,11 +130,11 @@ public class JogoRunning extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(pontos, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(errorRest, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(194, 194, 194)
                         .addComponent(jLabel5)
@@ -162,11 +175,11 @@ public class JogoRunning extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel7))
+                    .addComponent(errorRest))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel8))
+                    .addComponent(pontos))
                 .addContainerGap())
         );
 
@@ -179,12 +192,50 @@ public class JogoRunning extends javax.swing.JFrame {
 
     private void CHUTARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CHUTARActionPerformed
                 j.chutar(CHUTE.getText().charAt(0));
-                palavra.setText(j.printaChute());
+                
                 TENT.setText(j.getTentativas().toString());
-                acert.setText(j.getAcertos().toString()); 
+                acert.setText(j.getAcertos().toString());
+ 
+                if(j instanceof JogoEasy){
+                    JogoEasy j2 = (JogoEasy) j;
+                    errorRest.setText(j2.retornaErrosRestantes().toString());
+                    palavra.setText(j2.printaChute());
+                }
+                else
+                {
+                    if(j instanceof JogoMedium)
+                    {
+                        JogoMedium j2 = (JogoMedium) j;
+                        errorRest.setText(j2.retornaErrosRestantes().toString());
+                        palavra.setText(j2.printaChute());
+                    }
+                    else
+                    {
+                        if(j instanceof JogoHard)
+                        {
+                            JogoHard j2 = (JogoHard) j;
+                             errorRest.setText(j2.retornaErrosRestantes().toString());
+                             palavra.setText(j2.printaChute());
+                        }
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null, "Dificuldade invalida");
+                        }
+                        
+                    }
+                }
+                if(j.getPontosJogo() != null){
+                  pontos.setText(j.getPontosJogo().toString());
+                }
+               
                if(j.testaFimJogo()){
-                    
+                   if(j.verificaVitoria()){
+                   JOptionPane.showMessageDialog(null,"Parabén você venceu !!!!!\nPontos: "+ j.getPontosJogo());
+                   }else{
+                      JOptionPane.showMessageDialog(null,"Você PERDEU ): \nPontos: "+ j.getPontosJogo()); 
+                   }
                    JOptionPane.showMessageDialog(null, "Fim do JOGO >:");
+                   setVisible(false);
                 }
     }//GEN-LAST:event_CHUTARActionPerformed
 
@@ -195,14 +246,14 @@ public class JogoRunning extends javax.swing.JFrame {
     private javax.swing.JLabel NomeJogdor;
     private javax.swing.JLabel TENT;
     private javax.swing.JLabel acert;
+    private javax.swing.JLabel errorRest;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel palavra;
+    private javax.swing.JLabel pontos;
     // End of variables declaration//GEN-END:variables
 }
