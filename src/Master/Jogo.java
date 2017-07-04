@@ -110,10 +110,12 @@ public abstract class Jogo {
         return retorno;
     } 
     
-    
+    /*Metodos abstrato implementados nas classes filhas*/
     public abstract boolean testaFimJogo();
-    public abstract void chutar(Character chute);
+    public abstract boolean chutar(Character chute);
     public abstract boolean verificaVitoria();
+    public abstract Integer retornaErrosRestantes();
+    public abstract String printaChute();
     
     
 

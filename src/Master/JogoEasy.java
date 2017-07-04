@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 
@@ -82,15 +83,22 @@ public class JogoEasy extends Jogo {
      * soma o numero de tentatias
      * 
      */
-    public void chutar(Character chute){
-       jaChutadas.add(chute);
-       tentativas++;
-       chutes.addAll(p.ContemCharacter(chute));
-       if(!p.ContemCharacter(chute).isEmpty()){
-           setAcertos(getAcertos() + 1);
-           setPontosJogo(getAcertos() * 2);
+    public boolean chutar(Character chute){
+       if(!jaChutadas.contains(chute)){
+            jaChutadas.add(chute);
+            tentativas++;
+            chutes.addAll(p.ContemCharacter(chute));
+            if(!p.ContemCharacter(chute).isEmpty()){
+                setAcertos(getAcertos() + 1);
+                setPontosJogo(getAcertos() * 2);
+            }
+            return true;
+       }else{
+           return false;
        }
     }
+       
+
     
     public String printaChute()
     {

@@ -47,13 +47,20 @@ public class JogoHard extends Jogo {
      * soma o numero de tentatias
      * 
      */
-     public void chutar(Character chute){
-       jaChutadas.add(chute);
-       tentativas++;
-       chutes.addAll(p.ContemCharacter(chute));
-       if(!p.ContemCharacter(chute).isEmpty()){
-           setAcertos(getAcertos() + 1);
-           setPontosJogo(getAcertos() * 4);
+     public boolean chutar(Character chute){
+       if(!jaChutadas.contains(chute))
+       {      
+            jaChutadas.add(chute);
+            tentativas++;
+            chutes.addAll(p.ContemCharacter(chute));
+            if(!p.ContemCharacter(chute).isEmpty())
+            {
+                setAcertos(getAcertos() + 1);
+                setPontosJogo(getAcertos() * 3);
+            }
+            return true;
+       }else{
+           return false;
        }
     }
     

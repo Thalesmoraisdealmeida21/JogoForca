@@ -24,6 +24,7 @@ public class JogoRunning extends javax.swing.JFrame {
         initComponents();
         this.j = j;
         NomeJogdor.setText(j.getJ().getNome());
+        palavra.setText(j.printaChute());
     }
 
     JogoRunning(JogoMedium j) {
@@ -67,7 +68,6 @@ public class JogoRunning extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         palavra.setFont(new java.awt.Font("Ubuntu", 0, 36)); // NOI18N
-        palavra.setText("PALAVRA");
 
         CHUTAR.setText("Chutar");
         CHUTAR.addActionListener(new java.awt.event.ActionListener() {
@@ -206,52 +206,34 @@ public class JogoRunning extends javax.swing.JFrame {
     }//GEN-LAST:event_CHUTEActionPerformed
 
     private void CHUTARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CHUTARActionPerformed
-                j.chutar(CHUTE.getText().charAt(0));
-                
+                if(j.chutar(CHUTE.getText().charAt(0)))
+                {
                 TENT.setText(j.getTentativas().toString());
                 acert.setText(j.getAcertos().toString());
- 
-                if(j instanceof JogoEasy){
-                    JogoEasy j2 = (JogoEasy) j;
-                    errorRest.setText(j2.retornaErrosRestantes().toString());
-                    palavra.setText(j2.printaChute());
-                }
-                else
-                {
-                    if(j instanceof JogoMedium)
-                    {
-                        JogoMedium j2 = (JogoMedium) j;
-                        errorRest.setText(j2.retornaErrosRestantes().toString());
-                        palavra.setText(j2.printaChute());
-                    }
-                    else
-                    {
-                        if(j instanceof JogoHard)
-                        {
-                            JogoHard j2 = (JogoHard) j;
-                             errorRest.setText(j2.retornaErrosRestantes().toString());
-                             palavra.setText(j2.printaChute());
-                        }
-                        else
-                        {
-                            JOptionPane.showMessageDialog(null, "Dificuldade invalida");
-                        }
-                        
-                    }
-                }
+                errorRest.setText(j.retornaErrosRestantes().toString());
+                palavra.setText(j.printaChute());
+               
                 if(j.getPontosJogo() != null){
                   pontos.setText(j.getPontosJogo().toString());
                 }
- 
-               if(j.verificaVitoria()){
-                 try{  
-                   j.finalizaJogo();
-                   JOptionPane.showMessageDialog(null, "Parabéns você venceu");
-                   setVisible(false);
-                 }catch(Exception e){
-                     JOptionPane.showMessageDialog(null, "Erro ao finalizar jogo:\n"+e.getMessage());
-                 }
-               }
+                try{ 
+                if(j.verificaVitoria()){
+                    j.finalizaJogo();
+                    JOptionPane.showMessageDialog(null, "Parabéns você venceu");
+                    setVisible(false);
+               }else{
+                    if(j.testaFimJogo()){
+                        JOptionPane.showMessageDialog(null, "Fim do jogo você perdeu");
+                        j.finalizaJogo();
+                        setVisible(false);
+                    }
+                }
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(null, "Erro ao finalizar jogo"+ e.getMessage());
+                }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Você ja chutou esta letra informe outra");
+                }
     }//GEN-LAST:event_CHUTARActionPerformed
 
     private void dicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dicaActionPerformed
