@@ -18,7 +18,7 @@ import java.util.ArrayList;
  *
  * @author thales
  */
-public class Jogador {
+public class Jogador implements Comparable<Jogador> {
     private String nome;
     private int pontos;
     
@@ -49,6 +49,12 @@ public class Jogador {
         return nome;
     }
     
+    /**
+     * Grava o nome de um jogador no txt
+     * @param j
+     * @return
+     * @throws IOException 
+     */
     public static boolean CadastraJogador(Jogador j) throws IOException{
         int i;
         FileWriter arq = new FileWriter("/home/thales/BancoForca/jogador.txt", true);
@@ -57,7 +63,30 @@ public class Jogador {
         arq.close();
         return true;
     }
+    /**
+     * Grava o jogador no txt
+     * @return
+     * @throws IOException 
+     */
+    public boolean CadastraJogador() throws IOException{
+        try{
+        int i;
+        FileWriter arq = new FileWriter("/home/thales/BancoForca/jogador.txt", true);
+        PrintWriter gravarArq = new PrintWriter(arq);
+        gravarArq.println(getNome()+",0");
+        arq.close();
+        return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
     
+    /**
+     * Retorna um ArrayList de String com o nome dos jogadores cdastrados n txt
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public static ArrayList<String> getJogadores() throws FileNotFoundException, IOException{
         FileReader arq2 = new FileReader("/home/thales/BancoForca/jogador.txt");
         BufferedReader lerArq = new BufferedReader(arq2);
@@ -73,6 +102,34 @@ public class Jogador {
         return retorno;
     }
     
+    /**
+     * Retorna um arrayList do tipo Jogador com todos os jogadores gravados no txt
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
+    public static ArrayList<Jogador> getJogadores2() throws FileNotFoundException, IOException{
+        FileReader arq2 = new FileReader("/home/thales/BancoForca/jogador.txt");
+        BufferedReader lerArq = new BufferedReader(arq2);
+        String linha = lerArq.readLine(); 
+        ArrayList<Jogador> retorno = new ArrayList<>();
+        int i=0, pontos;
+        while (linha != null)
+        {
+            retorno.add(new Jogador(linha.substring(0, linha.indexOf(","))));
+            pontos = Jogador.retornaPontosBD(retorno.get(i));
+            retorno.get(i).setPontos(pontos);
+            linha = lerArq.readLine();
+            i++;
+   
+        }
+        return retorno;
+    }
+    /**
+     * grava os pontos do jogaor em um txt passando por parametro o jogador do qual deseja gravar
+     * @param j
+     * @throws IOException 
+     */
   public static void gravaPontosBD(Jogador j) throws IOException{
  
         FileReader arq2 = new FileReader("/home/thales/BancoForca/jogador.txt");
@@ -107,6 +164,13 @@ public class Jogador {
        arq.close();
     }
   
+    /**
+     * Consulta os dados de um determinao jogador no banco de dados em txt passando como passando como parametro o propio jogador
+     * 
+     * @param j
+     * @return
+     * @throws IOException 
+     */
     public static int retornaPontosBD(Jogador j) throws IOException{
         FileReader arq2 = new FileReader("/home/thales/BancoForca/jogador.txt");
         BufferedReader lerArq = new BufferedReader(arq2);
@@ -129,15 +193,24 @@ public class Jogador {
                 System.out.println("Entrou no if");
             }
             i++;
-        }
-        
+        } 
         return Integer.parseInt(arrayLeitura[1]);
-        
-        
-        
-      
     }
     
 
-    
+    /**
+     * Compara o jogador com um outro jogador
+     * @param j2
+     * @return 
+     */
+    @Override
+    public int compareTo(Jogador j2) {
+         if (this.pontos > j2.getPontos()) {
+          return -1;
+     }
+     if (this.pontos < j2.getPontos()) {
+          return 1;
+     }
+     return 0;
+    }
 }

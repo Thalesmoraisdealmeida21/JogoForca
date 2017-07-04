@@ -5,6 +5,9 @@
  */
 package Master.InterfaceGrafica;
 import Master.*;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 /**
  *
@@ -59,6 +62,7 @@ public class JogoRunning extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         NomeJogdor = new javax.swing.JLabel();
+        dica = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,31 +103,41 @@ public class JogoRunning extends javax.swing.JFrame {
 
         NomeJogdor.setText("Jogador");
 
+        dica.setText("Dica");
+        dica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dicaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(45, 45, 45)
-                            .addComponent(palavra, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(TENT))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(acert, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(CHUTE, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(CHUTAR)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(45, 45, 45)
+                                .addComponent(palavra, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(TENT))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(acert, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(CHUTE, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CHUTAR)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dica))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,7 +158,7 @@ public class JogoRunning extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
                                 .addComponent(NomeJogdor)))))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,7 +176,8 @@ public class JogoRunning extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CHUTAR)
-                            .addComponent(CHUTE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(CHUTE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dica)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(88, 88, 88)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -227,17 +242,48 @@ public class JogoRunning extends javax.swing.JFrame {
                 if(j.getPontosJogo() != null){
                   pontos.setText(j.getPontosJogo().toString());
                 }
-               
-               if(j.testaFimJogo()){
-                   if(j.verificaVitoria()){
-                   JOptionPane.showMessageDialog(null,"Parabén você venceu !!!!!\nPontos: "+ j.getPontosJogo());
-                   }else{
-                      JOptionPane.showMessageDialog(null,"Você PERDEU ): \nPontos: "+ j.getPontosJogo()); 
-                   }
-                   JOptionPane.showMessageDialog(null, "Fim do JOGO >:");
+ 
+               if(j.verificaVitoria()){
+                 try{  
+                   j.finalizaJogo();
+                   JOptionPane.showMessageDialog(null, "Parabéns você venceu");
                    setVisible(false);
-                }
+                 }catch(Exception e){
+                     JOptionPane.showMessageDialog(null, "Erro ao finalizar jogo:\n"+e.getMessage());
+                 }
+               }
     }//GEN-LAST:event_CHUTARActionPerformed
+
+    private void dicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dicaActionPerformed
+        if(evt.getSource()== dica)
+        {
+             if(j instanceof JogoEasy){
+                    JogoEasy j2 = (JogoEasy) j;
+                    JOptionPane.showMessageDialog(null, j2.getP().getDica());
+                }
+                else
+                {
+                    if(j instanceof JogoMedium)
+                    {
+                        JogoMedium j2 = (JogoMedium) j;
+                        JOptionPane.showMessageDialog(null, j2.getP().getDica());
+                    }
+                    else
+                    {
+                        if(j instanceof JogoHard)
+                        {
+                            JogoHard j2 = (JogoHard) j;
+                             JOptionPane.showMessageDialog(null, j2.getP().getDica());
+                        }
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null, "Dificuldade invalida");
+                        }
+                        
+                    }
+                }
+        }
+    }//GEN-LAST:event_dicaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -246,6 +292,7 @@ public class JogoRunning extends javax.swing.JFrame {
     private javax.swing.JLabel NomeJogdor;
     private javax.swing.JLabel TENT;
     private javax.swing.JLabel acert;
+    private javax.swing.JButton dica;
     private javax.swing.JLabel errorRest;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

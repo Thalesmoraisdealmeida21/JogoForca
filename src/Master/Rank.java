@@ -5,7 +5,9 @@
  */
 package Master;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -14,14 +16,17 @@ import java.util.ArrayList;
 public class Rank {
     private ArrayList<Jogador> jogadores;
 
-    public Rank(ArrayList<Jogador> jogadores) {
-        jogadores = new ArrayList<Jogador>();
-        this.jogadores = jogadores;
+    public Rank(ArrayList<Jogador> j) throws IOException {
+        jogadores = new ArrayList<>();
+        this.jogadores = j;
+        atualizaRank();
+        getRank();
+        
     }
-    
-    public Rank() {
-        jogadores = new ArrayList<Jogador>();
+     public Rank() throws IOException {
+        jogadores = (Jogador.getJogadores2());
     }
+   
 
     public void setJogadores(ArrayList<Jogador> jogadores) {
         this.jogadores = jogadores;
@@ -34,20 +39,19 @@ public class Rank {
     public Integer getPosicao(Jogador j)
     {
         int i, aux;
-       return 1;
+        return 1;
      
     }
     
-    /* Metodos a construir*/
-    //public ArrayList<Jogador> getRank();
-    public Integer getPontuacao(Integer posicao){return 0;}
-    public Integer getJogador(Integer posicao){return 0;}
+    public void atualizaRank() throws IOException{
+        jogadores = (Jogador.getJogadores2());
+    }
     
-    
-      
-    
-    
-    
-    
-    
+
+    public ArrayList<Jogador> getRank() throws IOException{
+        atualizaRank();
+        Collections.sort(jogadores);
+        return jogadores;
+        
+    }    
 }

@@ -12,14 +12,26 @@ public class Palavra
 {
     
     private String nome;
-    private int acertos = 0;
+    private String dica;
 
     public Palavra(String nome) {
-    
         this.nome = nome;
-  
     }
-  public void setNome(String nome) {
+    
+    public Palavra(String nome, String dica) {
+        this.nome = nome;
+        this.dica = dica;
+    }
+    
+    public void setDica(String dica) {
+        this.dica = dica;
+    }
+
+    public String getDica() {
+        return dica;
+    }
+    
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
@@ -31,6 +43,12 @@ public class Palavra
         return nome.length();
     }
     
+    /**
+     * Retorna um arrayList com as posições que contem determinado caracter c verificando se contem entre as jaChutadas
+     * @param c
+     * @param jaChutadas
+     * @return 
+     */
     public ArrayList<Integer> ContemCharacter(Character c, ArrayList<Character> jaChutadas){
         ArrayList<Integer> retorno = new ArrayList<>();
         int i;
@@ -43,11 +61,11 @@ public class Palavra
         }
         return retorno;
     }
-    
-     /* public boolean ContemCharacter(Character c){
-        return nome.contains(c.toString());
-    }*/
-      
+ /**
+  * Retorna um arrayList com as posições que contem determinado caracter c
+  * @param c
+  * @return 
+  */
     public ArrayList<Integer> ContemCharacter(Character c){
         ArrayList<Integer> retorno = new ArrayList<>();
         int i;
@@ -60,9 +78,7 @@ public class Palavra
         return retorno;
     }
 
-    int getAcertos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+  
 }
     
  

@@ -29,8 +29,6 @@ public class JogoHard extends Jogo {
         super(j, c);
         p = c.SorteiaPalavra(3);
         jaChutadas = new ArrayList<>();
-  
-     
     }
 
     public Palavra getP() {

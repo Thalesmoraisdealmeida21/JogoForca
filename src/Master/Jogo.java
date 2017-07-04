@@ -7,6 +7,7 @@ package Master;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,7 +19,7 @@ public abstract class Jogo {
     protected Integer tentativas = 0;
     protected Integer pontosJogo;
     protected ArrayList<Integer> chutes;
-    public Integer acertos = 0;
+    protected Integer acertos = 0;
    
 
     public void setC(Categoria c) {
@@ -32,8 +33,6 @@ public abstract class Jogo {
     public void setAcertos(Integer acertos) {
         this.acertos = acertos;
     }
-    
-    
 
     public Categoria getC() {
         return c;
@@ -47,8 +46,6 @@ public abstract class Jogo {
         return acertos;
     }
     
-    
-
     public void setChutes(ArrayList<Integer> chutes) {
         this.chutes = chutes;
     }
@@ -79,8 +76,13 @@ public abstract class Jogo {
         this.j = j;
     }
     
+    /**
+     * grava os pontos para o jogador e apresenta message de pontos
+     * @throws IOException 
+     */
     public void finalizaJogo() throws IOException{
-        j.setPontos(getPontosJogo());
+        j.setPontos(j.getPontos() + getPontosJogo());
+        JOptionPane.showMessageDialog(null, "Pontos: " + j.getPontos());
         j.gravaPontosBD(j);
     }
     
