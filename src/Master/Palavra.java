@@ -1,6 +1,12 @@
 
 package Master;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -61,6 +67,8 @@ public class Palavra
         }
         return retorno;
     }
+    
+    
  /**
   * Retorna um arrayList com as posições que contem determinado caracter c
   * @param c
@@ -77,7 +85,37 @@ public class Palavra
         }
         return retorno;
     }
-
+    
+    public static boolean cadastraPalavra(Palavra p, Categoria c) throws IOException
+    {
+        try{
+        FileWriter arq = new FileWriter("/home/thales/BancoForca/palavra.txt", true);
+        PrintWriter gravarArq = new PrintWriter(arq);
+        c.addPalavra(p);
+        gravarArq.println(p.getNome()+","+p.getDica()+","+c.getNome());
+        arq.close();
+        return true;
+        }catch(Exception e){
+            return false;
+        }   
+    }
+    
+    public static Palavra getPalavraBD(String nome) throws FileNotFoundException, IOException{
+        FileReader arq = new FileReader("/home/thales/BancoForca/palavra.txt");
+        BufferedReader lerArq = new BufferedReader(arq);
+        String linha = lerArq.readLine();
+        String readLineVet[] = new String[5];
+        Palavra retorno = null;
+        
+        while(linha != null){
+            readLineVet = linha.split(",");
+            if(readLineVet[0].equals(nome)){
+                retorno = new Palavra(readLineVet[0], readLineVet[1]);
+            }
+            linha = lerArq.readLine();
+        }
+        return retorno;
+    }
   
 }
     

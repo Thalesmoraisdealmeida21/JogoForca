@@ -34,6 +34,8 @@ public class Configurações extends javax.swing.JFrame {
         combodificuldade.addItem("MEDIO");
         combodificuldade.addItem("DIFICIL");
         addComboBoxJogadores();
+        addComboBoxCategorias();
+        tets.setEditable(false);
         rk = new Rank();
         
     }
@@ -45,6 +47,22 @@ public class Configurações extends javax.swing.JFrame {
         ArrayList<String> jogadores = Jogador.getJogadores();
         while(i < jogadores.size()){
                 jog.addItem(jogadores.get(i));
+                i++;
+            }
+       }catch(Exception e){
+           JOptionPane.showMessageDialog(null, e.getMessage());
+       }
+   }
+   
+   private void addComboBoxCategorias() throws IOException{
+       try{
+        int i=0;
+        categ.removeAllItems();
+        categ2.removeAllItems();
+        ArrayList<String> categorias = Categoria.getCategoriasBD();
+        while(i < categorias.size()){
+                categ.addItem(categorias.get(i));
+                categ2.addItem(categorias.get(i));
                 i++;
             }
        }catch(Exception e){
@@ -65,7 +83,7 @@ public class Configurações extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnInicia = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        categ = new javax.swing.JComboBox<>();
         txtCactegoria = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jgrNome = new javax.swing.JTextField();
@@ -75,19 +93,19 @@ public class Configurações extends javax.swing.JFrame {
         btncadjog = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        jogador1 = new javax.swing.JTextField();
+        palnome = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         btnCadCategoria = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        categ2 = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jog = new javax.swing.JComboBox<>();
         combodificuldade = new javax.swing.JComboBox<>();
         jLabel18 = new javax.swing.JLabel();
-        jogador2 = new javax.swing.JTextField();
+        dicatxt = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         verpontos = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -117,10 +135,10 @@ public class Configurações extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        categ.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        categ.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                categActionPerformed(evt);
             }
         });
 
@@ -149,6 +167,11 @@ public class Configurações extends javax.swing.JFrame {
         });
 
         jButton3.setText("Cadastrar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Ubuntu", 3, 14)); // NOI18N
         jLabel9.setText("Cadastrar Palavra");
@@ -166,10 +189,10 @@ public class Configurações extends javax.swing.JFrame {
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        categ2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        categ2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                categ2ActionPerformed(evt);
             }
         });
 
@@ -239,9 +262,9 @@ public class Configurações extends javax.swing.JFrame {
                             .addGap(3, 3, 3)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jogador1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jogador2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(categ, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(palnome, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(dicatxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -268,7 +291,7 @@ public class Configurações extends javax.swing.JFrame {
                             .addComponent(jLabel17))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(categ2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(combodificuldade, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
@@ -311,20 +334,22 @@ public class Configurações extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel15)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel6)
+                                .addComponent(categ2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jgrNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(verpontos)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel16)
-                                    .addComponent(jog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btncadjog))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jgrNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(verpontos)
+                                        .addComponent(jog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btncadjog)))
                                 .addGap(13, 13, 13)
                                 .addComponent(jLabel9))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -335,18 +360,18 @@ public class Configurações extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel12)
-                                    .addComponent(jogador1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(palnome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(2, 2, 2)
                                 .addComponent(btnInicia)))
                         .addGap(11, 11, 11)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(categ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jogador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dicatxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel5)
@@ -376,38 +401,35 @@ public class Configurações extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnIniciaActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void categActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_categActionPerformed
 
     private void btnIniciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIniciaMouseClicked
-        Categoria c = new Categoria("Informatica");
-        Palavra p = new Palavra("Computador", "Objeto utilizado para trabalhar");
-        Palavra p2 = new Palavra("Mouseo", "Se usa normalmente separado do teclado"); 
-        Palavra p3 = new Palavra("vvo", "palavra loca");
-        c.addPalavra(p);
-        c.addPalavra(p2);
-        c.addPalavra(p3);
-        JogoEasy je = null;
-        JogoMedium jm;
-        JogoHard jh;
-        JogoRunning frame = null;
-        Jogador thales = new Jogador(jog.getSelectedItem().toString());
+         
+
+        
+         Jogador thales =null;
+         Categoria c = null;
+         JogoRunning frame = null;
+         JogoEasy je = null;
+         JogoMedium jm = null;
+         JogoHard jh = null;
+         
         try {
-            thales.setPontos(retornaPontosBD(thales));
-        } catch (IOException ex) {
-            Logger.getLogger(Configurações.class.getName()).log(Level.SEVERE, null, ex);
-        }
+         thales = Jogador.getJogadorBD(jog.getSelectedItem().toString());
+         c = Categoria.getCategoriasBD(categ2.getSelectedItem().toString());
+       
         if(combodificuldade.getSelectedItem().toString() == "FACIL"){
          je = new JogoEasy(thales, c);
          frame = new JogoRunning(je);
         }
-         else
+        else
         {
             if(combodificuldade.getSelectedItem().toString() == "MEDIO")
             {
-                jm = new JogoMedium(thales, c);
-                frame = new JogoRunning(jm);
+              jm = new JogoMedium(thales, c);
+              frame = new JogoRunning(jm);
             }
             else
             {
@@ -419,15 +441,19 @@ public class Configurações extends javax.swing.JFrame {
             }
         }
         frame.setVisible(true);
+    }
+        catch (IOException ex) {
+            Logger.getLogger(Configurações.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnIniciaMouseClicked
 
     private void jgrNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jgrNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jgrNomeActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void categ2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categ2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_categ2ActionPerformed
 
     private void jogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jogActionPerformed
         // TODO add your handling code here:
@@ -465,6 +491,7 @@ public class Configurações extends javax.swing.JFrame {
              Categoria c = new Categoria(txtCactegoria.getText());
                try {
                    Categoria.CadastrarCategoria(c);
+                   addComboBoxCategorias();
                } catch (Exception ex) {
                    JOptionPane.showMessageDialog(null, ex.getMessage());
                }
@@ -498,18 +525,33 @@ public class Configurações extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try{
+            if(evt.getSource() == jButton3){
+            Palavra p = new Palavra(palnome.getText(), dicatxt.getText());
+            Categoria c = new Categoria(categ.getSelectedItem().toString());
+                if(Palavra.cadastraPalavra(p, c)){
+                    JOptionPane.showMessageDialog(null, "Cadastrado com sucesso");
+                }
+            } 
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Erro no cadastro");
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadCategoria;
     private javax.swing.JButton btnInicia;
     private javax.swing.JButton btncadjog;
+    private javax.swing.JComboBox<String> categ;
+    private javax.swing.JComboBox<String> categ2;
     private javax.swing.JComboBox<String> combodificuldade;
+    private javax.swing.JTextField dicatxt;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -529,8 +571,7 @@ public class Configurações extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jgrNome;
     private javax.swing.JComboBox<String> jog;
-    private javax.swing.JTextField jogador1;
-    private javax.swing.JTextField jogador2;
+    private javax.swing.JTextField palnome;
     private javax.swing.JTextArea tets;
     private javax.swing.JTextField txtCactegoria;
     private javax.swing.JButton verpontos;

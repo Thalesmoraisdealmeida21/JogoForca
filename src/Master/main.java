@@ -25,8 +25,16 @@ import javafx.print.Collation;
 public class main{
     public static void main(String args[]) throws IOException{
         
-        Configurações frame = new Configurações();
+     Configurações frame = new Configurações();
         frame.setVisible(true);
+        
+      
+     /* Palavra teste = new Palavra("ComputadorTsasdsa");
+      Categoria teste2 = new Categoria("Test");
+      teste2.addPalavra(teste);
+      
+      Palavra.cadastraPalavra(teste, teste2);*/
+      
            /*Jogador j1 = new Jogador("2", 20);
       Jogador j2 = new Jogador("1", 10);
       Jogador j3 = new Jogador("4", 50);

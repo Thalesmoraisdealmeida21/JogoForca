@@ -5,6 +5,9 @@
  */
 package Master;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -91,12 +94,80 @@ public class Categoria {
     }
      
      public static boolean CadastrarCategoria(Categoria categ) throws IOException{
-         FileWriter arq = new FileWriter("/home/thales/BancoForca/categoria.txt", true);
+         FileWriter arq = new FileWriter("/home/thales/BancoForca/palavra.txt", true);
          PrintWriter gravarArq = new PrintWriter(arq);
-         gravarArq.println(categ.getNome());
+         gravarArq.println(",,"+categ.getNome());
          arq.close();
         return true;
      }
+     
+     public void AtualizaCateg(ArrayList<Palavra> p){
+         palavras.addAll(p);
+     }
+     
+     public static void getPalavrasCateg(Categoria c) throws FileNotFoundException, IOException{
+          FileReader arq2 = new FileReader("/home/thales/BancoForca/palavra.txt");
+          BufferedReader lerArq = new BufferedReader(arq2);
+          ArrayList<Palavra> palavrass = new ArrayList<>();
+          String readLine = lerArq.readLine();
+          String readLineVet[] = new String[5];
+          
+          while(readLine != null){
+              readLineVet = readLine.split(",");
+              if(readLineVet[2].equals(c.getNome())){
+                palavrass.add(Palavra.getPalavraBD(readLineVet[0]));
+             }
+              c.setPalavras(palavrass);
+              readLine = lerArq.readLine();
+          }
+     }
+     
+     
+     
+     
+     
+     
+     
+     public static ArrayList<String> getCategoriasBD() throws FileNotFoundException, IOException{
+          FileReader arq2 = new FileReader("/home/thales/BancoForca/palavra.txt");
+          BufferedReader lerArq = new BufferedReader(arq2);
+          ArrayList<String> retorno = new ArrayList<>();
+          String readLine = lerArq.readLine();
+          String readLineVet[] = new String[5];
+          while(readLine != null){
+              readLineVet = readLine.split(",");
+              if(!retorno.contains(readLineVet[2])){
+              retorno.add(readLineVet[2]);
+              }
+              readLine = lerArq.readLine();
+          }
+         
+         return retorno;
+     }
+     
+     public static Categoria getCategoriasBD(String nome) throws FileNotFoundException, IOException{
+          FileReader arq2 = new FileReader("/home/thales/BancoForca/palavra.txt");
+          BufferedReader lerArq = new BufferedReader(arq2);
+          Categoria c=null;
+          String readLine = lerArq.readLine();
+          String readLineVet[] = new String[5];
+          while(readLine != null){
+              readLineVet = readLine.split(",");
+              if(nome.equals(readLineVet[2])){
+               c = new Categoria(nome);
+               getPalavrasCateg(c);
+              }
+              readLine = lerArq.readLine();
+          }
+         
+         return c;
+     }
+     
+    /* public static ArrayList<String> getCategoriasBD(Categoria c){
+         
+         
+         
+     }*/
          
      
   

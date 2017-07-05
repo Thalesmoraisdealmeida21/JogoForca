@@ -84,13 +84,15 @@ public class JogoEasy extends Jogo {
      * 
      */
     public boolean chutar(Character chute){
-       if(!jaChutadas.contains(chute)){
+       if(!jaChutadas.contains(chute))
+       {      
             jaChutadas.add(chute);
             tentativas++;
             chutes.addAll(p.ContemCharacter(chute));
-            if(!p.ContemCharacter(chute).isEmpty()){
+            if(!p.ContemCharacter(chute).isEmpty())
+            {
                 setAcertos(getAcertos() + 1);
-                setPontosJogo(getAcertos() * 2);
+                setPontosJogo(((getAcertos() * 2)) * (p.ContemCharacter(chute).size()));
             }
             return true;
        }else{

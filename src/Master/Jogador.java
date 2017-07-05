@@ -125,6 +125,25 @@ public class Jogador implements Comparable<Jogador> {
         }
         return retorno;
     }
+    
+    
+    public static Jogador getJogadorBD(String nome) throws IOException{
+        FileReader arq2 = new FileReader("/home/thales/BancoForca/jogador.txt");
+        BufferedReader lerArq = new BufferedReader(arq2);
+        String linha = lerArq.readLine(); 
+        String linha2[] = new String[2];
+        Jogador j = null;
+         while (linha != null)
+        {
+            linha2 = linha.split(",");
+            if(linha2[0].equals(nome)){
+                j = new Jogador(linha2[0], Integer.parseInt(linha2[1]));
+            }
+            linha = lerArq.readLine();
+        }
+         return j;
+    }
+    
     /**
      * grava os pontos do jogaor em um txt passando por parametro o jogador do qual deseja gravar
      * @param j
