@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  * @author thales
  */
 public class JogoMedium extends Jogo {
-    final private Integer numMaxErrors = 10;
+    final private Integer numMaxErrors = 30;
     private Palavra p;
     private ArrayList<Character> jaChutadas;
    
@@ -106,7 +106,7 @@ public class JogoMedium extends Jogo {
     } 
 
     public Integer retornaErrosRestantes(){
-        return numMaxErrors - tentativas;
+        return numMaxErrors - (tentativas - acertos);
     }
        
    public boolean testaFimJogo(){

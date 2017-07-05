@@ -416,6 +416,8 @@ public class Configurações extends javax.swing.JFrame {
          JogoMedium jm = null;
          JogoHard jh = null;
          
+         
+         
         try {
          thales = Jogador.getJogadorBD(jog.getSelectedItem().toString());
          c = Categoria.getCategoriasBD(categ2.getSelectedItem().toString());
@@ -441,8 +443,9 @@ public class Configurações extends javax.swing.JFrame {
             }
         }
         frame.setVisible(true);
-    }
-        catch (IOException ex) {
+    }catch(IllegalArgumentException e){
+        JOptionPane.showMessageDialog(null, "Nenhuma palavra cadastrada para a categoria");
+    }catch (IOException ex) {
             Logger.getLogger(Configurações.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnIniciaMouseClicked

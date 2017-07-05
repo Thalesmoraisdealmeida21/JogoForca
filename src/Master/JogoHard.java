@@ -27,7 +27,7 @@ public class JogoHard extends Jogo {
 
     public JogoHard(Jogador j, Categoria c) {
         super(j, c);
-        p = c.SorteiaPalavra(3);
+        p = c.SorteiaPalavra();
         jaChutadas = new ArrayList<>();
     }
 
@@ -56,7 +56,7 @@ public class JogoHard extends Jogo {
             if(!p.ContemCharacter(chute).isEmpty())
             {
                 setAcertos(getAcertos() + 1);
-                setPontosJogo(getAcertos() * 3);
+                setPontosJogo(((getAcertos() * 3)) * (p.ContemCharacter(chute).size()));
             }
             return true;
        }else{
@@ -131,7 +131,7 @@ public class JogoHard extends Jogo {
    }
     
       public Integer retornaErrosRestantes(){
-        return numMaxErrors - tentativas;
+        return numMaxErrors - (tentativas - acertos);
     }
 
  }

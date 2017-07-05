@@ -159,7 +159,7 @@ public class Jogador implements Comparable<Jogador> {
         while(linha != null)
         {
             leitura.add(linha);
-            System.out.println(linha);
+    
             linha = lerArq.readLine();
         }
         arq2.close();
@@ -170,7 +170,6 @@ public class Jogador implements Comparable<Jogador> {
         int i=0;
         while(i < leitura.size())
         {
-            System.out.println(leitura.get(i).substring(0, leitura.get(i).indexOf(",")));
             if((leitura.get(i).substring(0, leitura.get(i).indexOf(","))).equals(j.getNome())){
                 gravarArq.write(leitura.get(i).substring(0, leitura.get(i).indexOf(",") +1) + j.getPontos() + "\n");
             }
@@ -209,7 +208,6 @@ public class Jogador implements Comparable<Jogador> {
         while(i<leitura.size()){
             if(leitura.get(i).contains(j.getNome())){
                 arrayLeitura = leitura.get(i).split(",");
-                System.out.println("Entrou no if");
             }
             i++;
         } 

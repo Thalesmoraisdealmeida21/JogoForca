@@ -115,8 +115,10 @@ public class Categoria {
           while(readLine != null){
               readLineVet = readLine.split(",");
               if(readLineVet[2].equals(c.getNome())){
-                palavrass.add(Palavra.getPalavraBD(readLineVet[0]));
-             }
+                  if(!readLineVet[0].isEmpty()){
+                     palavrass.add(Palavra.getPalavraBD(readLineVet[0]));
+                  }
+              }
               c.setPalavras(palavrass);
               readLine = lerArq.readLine();
           }

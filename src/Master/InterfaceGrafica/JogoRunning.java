@@ -25,6 +25,10 @@ public class JogoRunning extends javax.swing.JFrame {
         this.j = j;
         NomeJogdor.setText(j.getJ().getNome());
         palavra.setText(j.printaChute());
+        TENT.setText(j.getTentativas().toString());
+        acert.setText(j.getAcertos().toString());
+        errorRest.setText(j.retornaErrosRestantes().toString());
+        
     }
 
     JogoRunning(JogoMedium j) {
@@ -32,7 +36,10 @@ public class JogoRunning extends javax.swing.JFrame {
        this.j = j;
        NomeJogdor.setText(j.getJ().getNome());
        palavra.setText(j.printaChute());
-       
+       TENT.setText(j.getTentativas().toString());
+       acert.setText(j.getAcertos().toString());
+       errorRest.setText(j.retornaErrosRestantes().toString());
+        
     }
 
     JogoRunning(JogoHard j) {
@@ -40,6 +47,18 @@ public class JogoRunning extends javax.swing.JFrame {
        this.j = j;
        NomeJogdor.setText(j.getJ().getNome());
        palavra.setText(j.printaChute());
+       TENT.setText(j.getTentativas().toString());
+       acert.setText(j.getAcertos().toString());
+       errorRest.setText(j.retornaErrosRestantes().toString());
+        
+    }
+    
+    public void printaInfJogo(){
+        NomeJogdor.setText(j.getJ().getNome());
+        palavra.setText(j.printaChute());
+        TENT.setText(j.getTentativas().toString());
+        acert.setText(j.getAcertos().toString());
+        errorRest.setText(j.retornaErrosRestantes().toString());
     }
 
     /**
@@ -69,7 +88,7 @@ public class JogoRunning extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        palavra.setFont(new java.awt.Font("Ubuntu", 0, 36)); // NOI18N
+        palavra.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
 
         CHUTAR.setText("Chutar");
         CHUTAR.addActionListener(new java.awt.event.ActionListener() {
@@ -208,21 +227,20 @@ public class JogoRunning extends javax.swing.JFrame {
     }//GEN-LAST:event_CHUTEActionPerformed
 
     private void CHUTARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CHUTARActionPerformed
-        boolean chutarq;
-        try{  
-            chutarq = j.chutar(CHUTE.getText().charAt(0));
-        }catch(StringIndexOutOfBoundsException e){
-           JOptionPane.showMessageDialog(null, "Informe o seu chute");
+        if(CHUTE.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "informe o seu chute");
         }
-       if(j.chutar(CHUTE.getText().charAt(0)))
-       {
-            try{
-                boolean chutar = j.chutar(CHUTE.getText().charAt(0));
-            palavra.setText(j.printaChute());
-      
-                if(j.verificaVitoria()){
-                    j.finalizaJogo();
+        else
+        {
+            if(j.chutar(CHUTE.getText().charAt(0)))
+            {
+                printaInfJogo();
+                try{
+                palavra.setText(j.printaChute());
+                if(j.verificaVitoria())
+                {
                     JOptionPane.showMessageDialog(null, "Parabéns você venceu");
+                    j.finalizaJogo();
                     setVisible(false);
                }
                else
@@ -234,27 +252,23 @@ public class JogoRunning extends javax.swing.JFrame {
                         setVisible(false);
                     }
                 }
-                
-                TENT.setText(j.getTentativas().toString());
-                acert.setText(j.getAcertos().toString());
-                errorRest.setText(j.retornaErrosRestantes().toString());
-        
-               
-                if(j.getPontosJogo() != null){
+
+                if(j.getPontosJogo() != null)
+                {
                   pontos.setText(j.getPontosJogo().toString());
                 }
-               
-               
-           }catch(StringIndexOutOfBoundsException e){
-               JOptionPane.showMessageDialog(null, "Informe o seu chute");
-           }catch(Exception e){
-                    JOptionPane.showMessageDialog(null, "Erro ao finalizar jogo"+ e.getMessage());
-                }
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null, "Você ja chutou esta letra informe outra");
-        }
+    
+                }catch(StringIndexOutOfBoundsException e){
+                    JOptionPane.showMessageDialog(null, "Informe o seu chute");
+                }catch(Exception e){
+                        JOptionPane.showMessageDialog(null, "Erro ao finalizar jogo"+ e.getMessage());
+                    }
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Você ja chutou esta letra informe outra");
+            }
+        }       
     }//GEN-LAST:event_CHUTARActionPerformed
 
     private void dicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dicaActionPerformed

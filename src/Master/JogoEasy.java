@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  * @author thales
  */
 public class JogoEasy extends Jogo {
-    final private Integer numMaxErrors = 20;
+    final private Integer numMaxErrors = 50;
     private Palavra p;
     private ArrayList<Character> jaChutadas;
    
@@ -36,7 +36,7 @@ public class JogoEasy extends Jogo {
      */
     public JogoEasy(Jogador j, Categoria c) {
         super(j, c);
-        p = c.SorteiaPalavra(1); //sorteia palavra easy
+        p = c.SorteiaPalavra(); //sorteia palavra easy
         jaChutadas = new ArrayList<>();
               
     }
@@ -144,7 +144,7 @@ public class JogoEasy extends Jogo {
     }
        
     public Integer retornaErrosRestantes(){
-        return numMaxErrors - tentativas;
+        return numMaxErrors - (tentativas - acertos);
     }
 
  }
