@@ -36,7 +36,7 @@ public class JogoEasy extends Jogo {
      */
     public JogoEasy(Jogador j, Categoria c) {
         super(j, c);
-        p = c.SorteiaPalavra(); //sorteia palavra easy
+        p = c.SorteiaPalavra();
         jaChutadas = new ArrayList<>();
               
     }
@@ -57,7 +57,7 @@ public class JogoEasy extends Jogo {
           try {
               finalizaJogo();
           } catch (IOException ex) {
-              Logger.getLogger(JogoEasy.class.getName()).log(Level.SEVERE, null, ex);
+              Logger.getLogger(JogoHard.class.getName()).log(Level.SEVERE, null, ex);
           }
           return true;
       }else{
@@ -91,7 +91,7 @@ public class JogoEasy extends Jogo {
             chutes.addAll(p.ContemCharacter(chute));
             if(!p.ContemCharacter(chute).isEmpty())
             {
-                setAcertos(getAcertos() + 1);
+                setAcertos(getAcertos());
                 setPontosJogo(((getAcertos() * 2)) * (p.ContemCharacter(chute).size()));
             }
             return true;

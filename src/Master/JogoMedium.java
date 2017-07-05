@@ -56,7 +56,7 @@ public class JogoMedium extends Jogo {
             if(!p.ContemCharacter(chute).isEmpty())
             {
                 setAcertos(getAcertos() + 1);
-                setPontosJogo(getAcertos() * 3);
+                setPontosJogo((getAcertos() * 3) * (p.ContemCharacter(chute).size()));
             }
             return true;
        }else{

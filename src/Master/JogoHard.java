@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  * @author thales
  */
 public class JogoHard extends Jogo {
-    final private Integer numMaxErrors = 5;
+    final private Integer numMaxErrors = 15;
     private Palavra p;
     private ArrayList<Character> jaChutadas;
    
@@ -56,7 +56,7 @@ public class JogoHard extends Jogo {
             if(!p.ContemCharacter(chute).isEmpty())
             {
                 setAcertos(getAcertos() + 1);
-                setPontosJogo(((getAcertos() * 3)) * (p.ContemCharacter(chute).size()));
+                setPontosJogo(((getAcertos() * 4)) * (p.ContemCharacter(chute).size()));
             }
             return true;
        }else{

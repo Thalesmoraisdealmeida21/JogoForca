@@ -96,8 +96,7 @@ public class Jogador implements Comparable<Jogador> {
         while (linha != null)
         {
             retorno.add(linha.substring(0, linha.indexOf(",")));
-            linha = lerArq.readLine();
-   
+            linha = lerArq.readLine();   
         }
         return retorno;
     }

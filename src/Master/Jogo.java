@@ -116,7 +116,7 @@ public abstract class Jogo {
     public abstract boolean verificaVitoria();
     public abstract Integer retornaErrosRestantes();
     public abstract String printaChute();
-    
+
     
 
 

@@ -59,6 +59,7 @@ public class JogoRunning extends javax.swing.JFrame {
         TENT.setText(j.getTentativas().toString());
         acert.setText(j.getAcertos().toString());
         errorRest.setText(j.retornaErrosRestantes().toString());
+        pontos.setText(j.getPontosJogo().toString());
     }
 
     /**
@@ -227,7 +228,8 @@ public class JogoRunning extends javax.swing.JFrame {
     }//GEN-LAST:event_CHUTEActionPerformed
 
     private void CHUTARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CHUTARActionPerformed
-        if(CHUTE.getText().equals("")){
+        
+        if(CHUTE.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "informe o seu chute");
         }
         else
@@ -235,39 +237,25 @@ public class JogoRunning extends javax.swing.JFrame {
             if(j.chutar(CHUTE.getText().charAt(0)))
             {
                 printaInfJogo();
-                try{
                 palavra.setText(j.printaChute());
-                if(j.verificaVitoria())
-                {
-                    JOptionPane.showMessageDialog(null, "Parabéns você venceu");
-                    j.finalizaJogo();
-                    setVisible(false);
-               }
-               else
-               {
-                    if(j.testaFimJogo())
-                    {
-                        JOptionPane.showMessageDialog(null, "Fim do jogo você perdeu");
+                
+                if(j.testaFimJogo()){
+                    if(j.verificaVitoria()){
+                        JOptionPane.showMessageDialog(null, "Parabens voce Ganhou");
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Parabens voce Perdeu");
+                    }
+                    try {
                         j.finalizaJogo();
-                        setVisible(false);
+                    } catch (IOException ex) {
+                        Logger.getLogger(JogoRunning.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    setVisible(false);
                 }
-
-                if(j.getPontosJogo() != null)
-                {
-                  pontos.setText(j.getPontosJogo().toString());
-                }
-    
-                }catch(StringIndexOutOfBoundsException e){
-                    JOptionPane.showMessageDialog(null, "Informe o seu chute");
-                }catch(Exception e){
-                        JOptionPane.showMessageDialog(null, "Erro ao finalizar jogo"+ e.getMessage());
-                    }
+            }else{
+                JOptionPane.showMessageDialog(null, "Ja chutou esta letra");
             }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "Você ja chutou esta letra informe outra");
-            }
+   
         }       
     }//GEN-LAST:event_CHUTARActionPerformed
 
